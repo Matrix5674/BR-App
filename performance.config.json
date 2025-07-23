@@ -1,0 +1,8 @@
+{
+  "enableFrameRateMonitoring": true,
+  "enableMemoryMonitoring": true,
+  "enableNetworkMonitoring": true,
+  "frameRateThreshold": 55,
+  "memoryThreshold": 157286400,
+  "reportingInterval": 30000
+}
