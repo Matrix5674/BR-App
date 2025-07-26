@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
-import { Video } from 'expo-av';
-import { Platform, StyleSheet, FlatList, View} from 'react-native';
+import { Video, ResizeMode } from 'expo-av';
+import { Platform, StyleSheet, FlatList, View, Text, Dimensions, ViewToken} from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -8,12 +8,16 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useRef, useState } from 'react';
+
+
+const { width, height } = Dimensions.get('window');
 
 const reels = [
   {
     id: 'r1',
     name: 'CNN Breaking News',
-    url: 'https://cnn.com/video/sample-breaking-news-clip.mp4',
+    url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
     caption: 'Breaking: Major climate summit underway in Europe.',
     tags: ['news', 'climate', 'breaking', 'summit'],
     date_published: '2025-07-20T15:00:00Z',
@@ -21,7 +25,7 @@ const reels = [
   {
     id: 'r2',
     name: 'Dean Withers',
-    url: 'https://youtube.com/shorts/deanwithers-politics-clip',
+    url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
     caption: 'Why the latest bill might change healthcare forever.',
     tags: ['politics', 'healthcare', 'policy', 'deanwithers'],
     date_published: '2025-07-18T12:30:00Z',
@@ -29,12 +33,12 @@ const reels = [
   {
     id: 'r3',
     name: 'BBC News',
-    url: 'https://bbc.co.uk/news/shorts/global-economy-update.mp4',
+    url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
     caption: 'Global markets react to new trade agreements.',
     tags: ['economy', 'markets', 'trade', 'bbcnews'],
     date_published: '2025-07-19T09:00:00Z',
   },
-  {
+  /* {
     id: 'r4',
     name: 'The Daily Signal',
     url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
@@ -90,34 +94,61 @@ const reels = [
     tags: ['comedy', 'satire', 'politics', 'humor'],
     date_published: '2025-07-20T08:00:00Z',
   },
+  */
 ];
 
+
+
 export default function TabTwoScreen() {
-    const renderReel = ({item}) => {
+    
+    /* const [inView, setInView] = useState(reels[0].id);
+    const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 80 }).current;
+
+
+    const onViewableItemsChanged = ({ viewableItems }: { viewableItems: Array<ViewToken> }) => {
+      if (viewableItems.length > 0) {
+        setInView(viewableItems[0].item.id);
+      }
+    };
+    
+    
+    const renderReel = ({ item }: { item: any }) => {
         return (
             <View style={styles.reelContainer}>
                 <Text> {item.id} </Text>
                 <Video
-                    source={{ uri: item.url }}
-                    style={{width:'100%', height:'100%'}}
+                    source={{ uri:item.url }}
+                    style={{width:'100%', height:height}}
+                    isLooping={ true }
+                    shouldPlay={ inView === item.id }
+                    resizeMode= { ResizeMode.COVER }
                 />
-                <Text style={styles.caption}>{item.caption}</Text>
+                <Text>{item.caption}</Text>
             </View>
+
         )
-    }
+    } */
 
   return (
+    <View style={{ flex: 1 }}>
+    <View style={styles.headerOverlay}>
+      <ThemedText type="title">Reels</ThemedText>
+    </View>
+    {/*
     <FlatList
-     data={reels}
-     keyExtractor={item => item.id}
-     renderItem={renderReel}
-      ListHeaderComponent={
-          <View>
-            <ThemedText style={styles.titleContainer} type="title"> Reels </ThemedText>
-          </View>
-      }
-
+      data={reels}
+      keyExtractor={item => item.id}
+      renderItem={renderReel}
+      contentContainerStyle={{ paddingTop: 80 }} // adjust as needed
+      pagingEnabled
+      snapToAlignment="start"
+      decelerationRate="fast"
+      showsVerticalScrollIndicator={false}
+      onViewableItemsChanged= {onViewableItemsChanged}
+      viewabilityConfig={viewabilityConfig}
     />
+    */}
+  </View>
 
   );
 }
@@ -134,9 +165,24 @@ const styles = StyleSheet.create({
     marginLeft:15,
     flexDirection: 'row',
     gap: 8,
+    
   },
   reelContainer: {
+    borderWidth: 1,
+    borderColor: 'red',
+    width: '100%',
+    height: height,
     marginVertical: 16,
     alignItems: 'center',
+  },
+  headerOverlay: {
+    position: 'absolute',
+    top: 10,
+    left: 0,
+    width: '100%',
+    zIndex: 10,
+    paddingTop: 40, // adjust for status bar
+    paddingLeft: 15,
+    backgroundColor: 'transparent',
   },
 });

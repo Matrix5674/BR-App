@@ -26,10 +26,10 @@ const posts = [
 export default function HomeScreen() {
     const {width, height} = Dimensions.get('window')
 
-    const wp = (percentage) => width * (percentage / 100);
-    const hp = (percentage) => height * (percentage / 100);
+    const wp = (percentage: number) => width * (percentage / 100);
+    const hp = (percentage: number) => height * (percentage / 100);
 
-    const renderStory = ({item}) => (
+    const renderStory = ({ item }: {item: any}) => (
         <TouchableOpacity style={styles.storyContainer}>
             <Image source={{ uri: item.image }} style={styles.storyImage} />
             <Text style={styles.storyName}>{item.name}</Text>
@@ -37,14 +37,13 @@ export default function HomeScreen() {
     )
 
 
-  const renderPost = ({ item }) => (
+  const renderPost = ({ item }: { item: any }) => (
 
     <View style={styles.postContainer}>
       <Text style={styles.postUser}>{item.user}</Text>
       <Image
         source={{uri:item.image}}
-        width= {400}
-        height= {275}
+        style={{width: 400, height: 275}}
       />
       <Text>{item.content}</Text>
     </View>
@@ -57,7 +56,7 @@ export default function HomeScreen() {
               keyExtractor={item => item.id}
               renderItem={renderPost}
               ListHeaderComponent={
-                <View style={styles.headerWrapper}>
+                <View>
                   <ThemedView style={styles.titleContainer}>
                     <ThemedText type="title">Newsreels</ThemedText>
                   </ThemedView>
