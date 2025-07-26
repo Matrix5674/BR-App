@@ -17,7 +17,7 @@ const reels = [
   {
     id: 'r1',
     name: 'CNN Breaking News',
-    url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
+    url: require('../../assets/Reels_Data/Reel_One.mp4'),
     caption: 'Breaking: Major climate summit underway in Europe.',
     tags: ['news', 'climate', 'breaking', 'summit'],
     date_published: '2025-07-20T15:00:00Z',
@@ -25,7 +25,7 @@ const reels = [
   {
     id: 'r2',
     name: 'Dean Withers',
-    url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
+    url: require('../../assets/Reels_Data/Reel_Two.mp4'),
     caption: 'Why the latest bill might change healthcare forever.',
     tags: ['politics', 'healthcare', 'policy', 'deanwithers'],
     date_published: '2025-07-18T12:30:00Z',
@@ -33,7 +33,7 @@ const reels = [
   {
     id: 'r3',
     name: 'BBC News',
-    url: 'https://thedailysignal.com/shorts/conservative-policy-breakdown.mp4',
+    url: require('../../assets/Reels_Data/Reel_Three.mp4'),
     caption: 'Global markets react to new trade agreements.',
     tags: ['economy', 'markets', 'trade', 'bbcnews'],
     date_published: '2025-07-19T09:00:00Z',
@@ -101,7 +101,7 @@ const reels = [
 
 export default function TabTwoScreen() {
     
-    /* const [inView, setInView] = useState(reels[0].id);
+    const [inView, setInView] = useState(reels[0].id);
     const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 80 }).current;
 
 
@@ -111,13 +111,12 @@ export default function TabTwoScreen() {
       }
     };
     
-    
     const renderReel = ({ item }: { item: any }) => {
         return (
             <View style={styles.reelContainer}>
                 <Text> {item.id} </Text>
                 <Video
-                    source={{ uri:item.url }}
+                    source={ item.url }
                     style={{width:'100%', height:height}}
                     isLooping={ true }
                     shouldPlay={ inView === item.id }
@@ -125,16 +124,14 @@ export default function TabTwoScreen() {
                 />
                 <Text>{item.caption}</Text>
             </View>
-
         )
-    } */
+    }
 
   return (
     <View style={{ flex: 1 }}>
     <View style={styles.headerOverlay}>
       <ThemedText type="title">Reels</ThemedText>
     </View>
-    {/*
     <FlatList
       data={reels}
       keyExtractor={item => item.id}
@@ -147,7 +144,6 @@ export default function TabTwoScreen() {
       onViewableItemsChanged= {onViewableItemsChanged}
       viewabilityConfig={viewabilityConfig}
     />
-    */}
   </View>
 
   );
